@@ -4,6 +4,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+    @featured_events = Event.all.sample(6)
   end
 
   def show
