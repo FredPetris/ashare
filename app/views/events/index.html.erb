@@ -10,7 +10,7 @@
   <% @events.each do |event| %>
     <div class="col-xs-6 col-sm-3">
       <%= link_to event.label, event_path(event) %>
-      <%= cl_image_tag event.picture, transformation: "image_thumb" %>
+      <%#= cl_image_tag event.picture, transformation: "image_thumb" %>
     </div>
   <% end %>
 </div>
