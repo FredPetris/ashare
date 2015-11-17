@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
   validates :user_id, presence: true
   validates :label, presence: true
   validates :description, presence: true
-  validates :address, prensence: true
+  validates :address, presence: true
   validates :category, presence: true
+  validates :city, presence: true
 end
