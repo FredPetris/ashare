@@ -1,0 +1,13 @@
+<h1>Des idées d'évènement</h1>
+<p>
+  <%= link_to "Créer un évènement", new_event_path, class: "btn btn-primary" %>
+</p>
+
+<div class="row">
+  <% @events.each do |event| %>
+    <div class="col-xs-6 col-sm-3">
+      <%= link_to event.label, event_path(event) %>
+      <%= cl_image_tag event.picture, transformation: "image_thumb" %>
+    </div>
+  <% end %>
+</div>
