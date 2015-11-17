@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'events/occurrences'
+
+  get 'events/participants'
+
+  get 'events/pictures'
+
+  get 'events/users'
+
+  get 'events/wishes'
+
   devise_for :users
   root to: 'pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
