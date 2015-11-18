@@ -4,7 +4,7 @@
       <%= f.error_notification %>
 
       <%= f.input :label, placeholder: "un nom pour votre image" %>
-      <%= f.input :image_url %>
+      <%= f.input :image_url, as: :file %>
 
       <p>
         <%= f.button :submit, class: "btn btn-primary" %>

@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
 
   devise :omniauthable, omniauth_providers: [:facebook]
 
+  has_many :events, dependent: :destroy
+  has_many :wishes, dependent: :destroy
+  validates :email, presence: true, uniqueness: true
+
   def self.find_for_facebook_oauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
