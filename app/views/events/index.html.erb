@@ -1,4 +1,4 @@
-<h1>Des idées d'évènement</h1>
+<h1>Des idées d'évènements</h1>
 <p>
   <%= link_to "Créer un évènement", new_event_path, class: "btn btn-primary" %>
 </p>
@@ -12,7 +12,10 @@
       <%= link_to event.label, event_path(event) %>
       <p>
         <% if event.pictures.count > 0 %>
-          <%= cl_image_tag event.pictures[1].image_url , :width => 100, :height => 150, :crop => :fill %>
+          <%= cl_image_tag event.pictures.first.image_url , :width => 100, :height => 150, :crop => :fill %>
+          <span class ="avatar">
+            <%= "#{event.participation} €" %>
+          </span>
         <% end %>
       </p>
     </div>
