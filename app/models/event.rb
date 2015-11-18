@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   belongs_to :user
-  has_many :occurences, dependent: :destroy
+  has_many :occurrences, dependent: :destroy
   has_many :pictures, dependent: :destroy
   has_many :wishes, dependent: :destroy
 
