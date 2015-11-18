@@ -1,14 +1,16 @@
 class EventsController < ApplicationController
 
   before_action :set_event, only: [:show, :destroy]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     @events = Event.all
+    @featured_events = Event.all.sample(6)
   end
 
   def show
-    # @pictures = Picture.all
-    # @participants = Participant.all
+    @occurrences = @event.occurrences
+    @pictures = @event.pictures
   end
 
   def new
@@ -17,9 +19,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    raise
     if @event.save
-      raise
       redirect_to @event
     else
      render :new
@@ -38,14 +38,16 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:label,
-                                  :description,
-                                  :address,
-                                  :city,
-                                  :phone_number,
-                                  :number,
-                                  :category,
-                                  :participation)
+    params.require(:event).permit(
+      :label,
+      :description,
+      :address,
+      :city,
+      :phone_number,
+      :number,
+      :category,
+      :participation
+      ).merge(user_id: current_user.id)
   end
 
 end

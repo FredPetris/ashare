@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
 
   devise :omniauthable, omniauth_providers: [:facebook]
 
+  has_many :events, dependent: :destroy
+  has_many :wishes, dependent: :destroy
+  has_many :participants
+  validates :email, presence: true, uniqueness: true
 
   def self.find_for_facebook_oauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -20,6 +24,5 @@ class User < ActiveRecord::Base
       user.token_expiry = Time.at(auth.credentials.expires_at)
     end
   end
-
 
 end

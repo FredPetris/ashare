@@ -1,0 +1,30 @@
+<h1><%= @event.label %></h1>
+<p>
+  <%= link_to "Ajouter une image", new_event_picture_path(@event),
+    class: "btn btn-primary" %>
+  <%= link_to "Ajouter une date", new_event_occurrence_path(@event),
+    class: "btn btn-primary" %>
+  <%= link_to "Back", root_path, class: "btn btn-info btn-back" %>
+</p>
+<div class="row">
+  <% @event.pictures.each do |picture| %>
+    <div class="col-xs-6 col-sm-3">
+      <%= cl_image_tag picture.image_url, :width => 300, :crop => :fill %>
+      <%= picture.label %>
+    </div>
+  <% end %>
+</div>
+<div class="row text-center">
+  <% @event.occurrences.each do |occurrence| %>
+    <div class="col-xs-6 col-sm-3">
+      <%= occurrence.date.strftime('%a %d %b %Y') %>
+      à
+      <%= occurrence.time.strftime('%H') %> : <%=occurrence.time.strftime('%M') %>
+      <% if occurrence.participate?(current_user) %>
+        <%= link_to "Je veux me désinscrire", occurrence.participate(current_user), method: :delete, class: "btn btn-danger" %>
+      <% else %>
+        <%= link_to "Je veux participer", occurrence_participants_path(occurrence), method: :post, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
