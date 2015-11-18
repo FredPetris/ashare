@@ -1,0 +1,29 @@
+
+<div class="banner text-center login-banner">
+  <div class="banner-gradient"></div>
+    <div class="banner-content form-margin-top">
+      <h2>Sign up</h2>
+      <br>
+      <br>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= f.error_notification %>
+
+        <div class="form-group">
+          <%= f.input :email, label: false, required: true, autofocus: true, placeholder:"email" %>
+        </div>
+        <br>
+        <div class="form-group">
+          <%= f.input :password, label: false, required: true , placeholder:"password (#{@minimum_password_length} char min)" if @minimum_password_length %>
+        </div>
+        <div class="form-group">
+          <%= f.input :password_confirmation, label: false, required: true, placeholder:"confirmation" %>
+        </div>
+        <br>
+        <div class="form-actions">
+          <%= f.button :submit, "Sign up", class: "btn-danger" %>
+        </div>
+      <% end %>
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>
