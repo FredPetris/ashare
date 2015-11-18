@@ -9,8 +9,8 @@ class EventsController < ApplicationController
   end
 
   def show
-    @pictures = Picture.all
-    @participants = Participant.all
+    @occurrences = @event.occurrences
+    @pictures = @event.pictures
   end
 
   def new
@@ -38,14 +38,16 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:label,
-                                  :description,
-                                  :address,
-                                  :city,
-                                  :phone_number,
-                                  :number,
-                                  :category,
-                                  :participation).merge(user_id: current_user.id)
+    params.require(:event).permit(
+      :label,
+      :description,
+      :address,
+      :city,
+      :phone_number,
+      :number,
+      :category,
+      :participation
+      ).merge(user_id: current_user.id)
   end
 
 end

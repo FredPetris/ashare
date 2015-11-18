@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :events, dependent: :destroy
   has_many :wishes, dependent: :destroy
+  has_many :participants
   validates :email, presence: true, uniqueness: true
 
   def self.find_for_facebook_oauth(auth)

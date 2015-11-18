@@ -10,7 +10,11 @@
   <% @events.each do |event| %>
     <div class="col-xs-6 col-sm-3">
       <%= link_to event.label, event_path(event) %>
-      <%#= cl_image_tag event.picture, transformation: "image_thumb" %>
+      <p>
+        <% if event.pictures.count > 0 %>
+          <%= cl_image_tag event.pictures[1].image_url , :width => 100, :height => 150, :crop => :fill %>
+        <% end %>
+      </p>
     </div>
   <% end %>
 </div>
