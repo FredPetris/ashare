@@ -17,7 +17,7 @@
 
 <div class="row">
   <% @event.pictures.each do |picture| %>
-    <div class="col-xs-6 col-sm-3 ">
+    <div class="col-md-4">
       <%= cl_image_tag picture.image_url, :width => 300, :crop => :fill %>
       <%= picture.label %>
       <% if user_signed_in? and user_organizer? %>
@@ -59,46 +59,53 @@
 
       <% if occurrence.participate?(current_user) %>
         <%= link_to "Je veux me désinscrire", participant_path(occurrence.participants.where(user: current_user).take.id), method: :delete, class: "btn btn-danger" %>
-      <% else %>
+      <% elsif @event.place - occurrence.participants.count > 0 %>
         <%= link_to "Je veux participer", occurrence_participants_path(occurrence), method: :post, class: "btn btn-primary" %>
+      <% else %>
+        <div class="btn btn-danger" disabled="disabled">Aucune place disponible</div>
       <% end %>
 
-      <%= link_to "Voir les autres participants", "#modal_participants", :class => "btn btn-info", "data-toggle" => "modal" %>
-      <div class="modal fade" id="modal_participants" title="Les participants">
-        <div class="modal-header">
-          <button aria-hidden="false" class="close" data-dismiss="modal" type="button">×</button>
-          <h3 id="myModalLabel">Les participants</h3>
+      <% if occurrence.participate?(current_user) and occurrence.participants.count > 0 %>
+        <%= link_to "Voir les autres participants", "#modal_participants_#{occurrence.id}", :class => "btn btn-info", "data-toggle" => "modal" %>
+        <div class="modal fade" id="modal_participants_<%= occurrence.id %>" title="Les participants">
+          <div class="modal-header">
+            <button aria-hidden="false" class="close" data-dismiss="modal" type="button">×</button>
+            <h3 id="myModalLabel">Les participants</h3>
+          </div>
+          <div class="modal-body">
+            <% occurrence.participants.each do |participant| %>
+            <p>
+              <%= participant.user.first_name %>
+              <%= participant.user.last_name %>
+            </p>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button aria-hidden="true" class="btn" data-dismiss="modal">Close</button>
+          </div>
         </div>
-        <div class="modal-body">
-          <% occurrence.participants.each do |participant| %>
-          <p>
-            <%= participant.user.first_name %>
-            <%= participant.user.last_name %>
-          </p>
-          <% end %>
-        </div>
-        <div class="modal-footer">
-          <button aria-hidden="true" class="btn" data-dismiss="modal">Close</button>
-        </div>
-      </div>
+      <% end %>
 
-      <%= link_to "Voir les commentaires", "#modal_commentaires", :class => "btn btn-info", "data-toggle" => "modal" %>
-      <div class="modal fade" id="modal_commentaires" title="Les commentaires">
-        <div class="modal-header">
-          <button aria-hidden="false" class="close" data-dismiss="modal" type="button">×</button>
-          <h3 id="myModalLabel">Les commentaires</h3>
+      <% if occurrence.participants.count > 0 %>
+        <%= link_to "Voir les commentaires", "#modal_commentaires_#{occurrence.id}", :class => "btn btn-info", "data-toggle" => "modal" %>
+        <div class="modal fade" id="modal_commentaires_<%= occurrence.id %>" title="Les commentaires">
+          <div class="modal-header">
+            <button aria-hidden="false" class="close" data-dismiss="modal" type="button">×</button>
+            <h3 id="myModalLabel">Les commentaires</h3>
+          </div>
+          <div class="modal-body">
+            <% occurrence.participants.each do |participant| %>
+            <p>
+              <%= participant.content %>
+            </p>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button aria-hidden="true" class="btn" data-dismiss="modal">Close</button>
+          </div>
         </div>
-        <div class="modal-body">
-          <% occurrence.participants.each do |participant| %>
-          <p>
-            <%= participant.content %>
-          </p>
-          <% end %>
-        </div>
-        <div class="modal-footer">
-          <button aria-hidden="true" class="btn" data-dismiss="modal">Close</button>
-        </div>
-      </div>
+      <% end %>
+
     </div>
   <% end %>
 </div>
