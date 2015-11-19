@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'events#index'
+  root to: 'pages#home'
 
   resources :events do
     resources :pictures, only: [:new, :create, :destroy]
