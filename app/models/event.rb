@@ -13,9 +13,13 @@ class Event < ActiveRecord::Base
   validates :place, :numericality => { :greater_than_or_equal_to => 0 }
   validates :participation, :numericality => { :greater_than_or_equal_to => 0 }
 
-  def self.search(search)
+  def self.search(search, value)
     if search
-      self.where(:category => ["category LIKE ?", "#{search}"])
+      if search == "user_id"
+        self.where(user_id: value.to_i)
+      else
+        self.where(:category => ["category LIKE ?", "#{search}"])
+      end
     else
       self.all
     end

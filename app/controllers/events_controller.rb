@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @events = Event.search(params[:search])
+    @events = Event.search(params[:search], params[:value])
     # @featured_events = Event.all.sample(6)
   end
 
