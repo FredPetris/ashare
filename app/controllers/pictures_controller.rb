@@ -16,9 +16,9 @@ class PicturesController < ApplicationController
   end
 
   def destroy
-    @picture = picture.find(params[:id])
+    @picture = Picture.find(params[:id])
     @picture.destroy
-    redirect_to event_path(@picture.event_id)
+    redirect_to :back
   end
 
   private

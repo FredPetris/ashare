@@ -1,11 +1,11 @@
 class EventsController < ApplicationController
 
-  before_action :set_event, only: [:show, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @events = Event.all
-    @featured_events = Event.all.sample(6)
+    @events = Event.search(params[:search])
+    # @featured_events = Event.all.sample(6)
   end
 
   def show
@@ -20,9 +20,20 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      redirect_to @event
+      redirect_to :back
     else
      render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @event.update(event_params)
+      redirect_to :back
+    else
+     render :edit
     end
   end
 
@@ -43,8 +54,8 @@ class EventsController < ApplicationController
       :description,
       :address,
       :city,
-      :phone_number,
-      :number,
+      :phone,
+      :place,
       :category,
       :participation
       ).merge(user_id: current_user.id)

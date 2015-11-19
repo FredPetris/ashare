@@ -18,7 +18,7 @@ class OccurrencesController < ApplicationController
   def destroy
     @occurrence = occurrence.find(params[:id])
     @occurrence.destroy
-    redirect_to event_path(@occurrence.event_id)
+    redirect_to :back
   end
 
   private
