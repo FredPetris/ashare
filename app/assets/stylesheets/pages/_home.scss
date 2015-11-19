@@ -2,3 +2,47 @@
  * SASS code SPECIFIC TO your home page
  * (margin/padding adjustments, background image, etc..)
  * ------------------------------------- */
+
+// External libraries
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+.jumbo {
+  background-image: url(http://lavillamathilda.com/wp-content/uploads/2015/06/Marchi-13-reduite-e1435831071746.jpg);
+  color: #FFFFFF;
+  background-position: center;
+  position:relative;
+}
+
+.jumbo h1 {
+  .accroche h1 {
+   color:white;
+   margin: 0 auto;
+  font-family: 'Roboto', sans-serif;
+ }
+
+ .accroche {
+   padding: 200px 0px;
+  text-shadow: 0px 0px 20px #000;
+}
+
+.searchbar {
+  padding:25px 0px;
+  background-color: rgba(#000, 0.7);
+}
+
+.form-inline .form-control {
+    display: inline-block;
+    width: 100%;
+}
+
+.btn-primary {
+  font-family: 'Roboto', sans-serif;
+}
+
+.placeholder-font {
+  font-family: 'Roboto', sans-serif;
+}
+}
