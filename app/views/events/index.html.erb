@@ -5,18 +5,18 @@
 
 <div class="row">
   <% @events.each do |event| %>
-    <div class="col-xs-6 col-sm-3">
-      <h3>
-        <%= link_to event.label, event_path(event) %>
-      </h3>
-      <p>
+    <div class="col-md-3">
+      <div class="event">
         <% if event.pictures.count > 0 %>
           <%= cl_image_tag event.pictures.first.image_url , :width => 100, :height => 150, :crop => :fill %>
-          <span class ="avatar">
+          <span class ="price">
             <%= "#{event.participation} €" %>
           </span>
         <% end %>
-      </p>
+        <h3>
+          <%= link_to event.label, event_path(event) %>
+        </h3>
+      </div>
     </div>
   <% end %>
 </div>
