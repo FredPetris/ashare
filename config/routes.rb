@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :occurrences do
     resources :participants, only: [:create]
   end
-  resources :participants, only: [:destroy]
+  resources :participants, only: [:index, :destroy, :update]
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
   # root to: 'pages#home'
