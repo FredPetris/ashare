@@ -18,6 +18,7 @@ gem 'omniauth-facebook'
 
 gem 'carrierwave'
 gem 'cloudinary'
+gem 'geocoder'
 
 group :development, :test do
   gem 'binding_of_caller'

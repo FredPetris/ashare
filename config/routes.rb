@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :homes
   root to: 'events#index'
 
   resources :events do
