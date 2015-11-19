@@ -4,8 +4,8 @@ class EventsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @events = Event.all
-    @featured_events = Event.all.sample(6)
+    @events = Event.search(params[:search])
+    # @featured_events = Event.all.sample(6)
   end
 
   def show
@@ -43,8 +43,8 @@ class EventsController < ApplicationController
       :description,
       :address,
       :city,
-      :phone_number,
-      :number,
+      :phone,
+      :place,
       :category,
       :participation
       ).merge(user_id: current_user.id)

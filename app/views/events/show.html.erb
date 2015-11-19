@@ -39,14 +39,16 @@
       <span>
         <%= occurrence.date.strftime('%a %d %b %Y') %> à
         <%= occurrence.time.strftime('%H') %> :
-        <%=occurrence.time.strftime('%M') %>
+        <%= occurrence.time.strftime('%M') %>
         <% if user_signed_in? and @event.user_id == current_user.id %>
-        <%= link_to event_occurrence_path(@event, occurrence),
-          method: :delete,
-          data: { confirm: "Are you sure?" } do %>
+          <%= link_to event_occurrence_path(@event, occurrence),
+            method: :delete,
+            data: { confirm: "Are you sure?" } do %>
             <i class="glyphicon glyphicon-trash"></i>
           <% end %>
-      <% end %>
+        <% end %>
+        <p> Il reste <%= pluralize(@event.place - occurrence.participants.count, "place") %>
+        </p>
       </span>
       <% if occurrence.participate?(current_user) %>
         <%= link_to "Je veux me désinscrire", occurrence.participate(current_user), method: :delete, class: "btn btn-danger" %>

@@ -10,4 +10,14 @@ class Event < ActiveRecord::Base
   validates :address, presence: true
   validates :category, presence: true
   validates :city, presence: true
+  validates :place, :numericality => { :greater_than_or_equal_to => 0 }
+
+  def self.search(search)
+    if search
+      self.where(:category => ["category LIKE ?", "#{search}"])
+    else
+      self.all
+    end
+  end
+
 end
