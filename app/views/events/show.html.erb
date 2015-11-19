@@ -1,4 +1,9 @@
 <h1><%= @event.label %></h1>
+<% if user_signed_in? and @event.user_id == current_user.id %>
+  <%= link_to edit_event_path(@event) do %>
+      <i class="glyphicon glyphicon-pencil"></i>
+  <% end %>
+<% end %>
 <p>
   <%= @event.description %>
 </p>

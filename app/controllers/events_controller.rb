@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  before_action :set_event, only: [:show, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
@@ -20,9 +20,20 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      redirect_to @event
+      redirect_to :back
     else
      render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @event.update(event_params)
+      redirect_to :back
+    else
+     render :edit
     end
   end
 
