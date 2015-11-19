@@ -5,6 +5,8 @@ class ParticipantsController < ApplicationController
   def create
     @participant = current_user.participants.new(occurrence: @occurrence)
     @participant.save
+    owner = @occurrence.event.user
+    UserMailer.participate(current_user, @occurrence, owner).deliver_now
     redirect_to :back
   end
 
