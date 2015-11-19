@@ -4,4 +4,13 @@ class Participant < ActiveRecord::Base
 
   validates :user_id, presence: true
   validates :occurrence_id, presence: true
+
+  def self.search(search)
+    if search
+      self.where(:user_id => ["user_id == ?", "#{search}"])
+    else
+      self.all
+    end
+  end
+
 end

@@ -1,6 +1,7 @@
 class OccurrencesController < ApplicationController
 
   before_action :find_event, only: [ :new, :create ]
+  before_action :find_occurrence, only: [ :update, :destroy ]
 
   def new
     @occurrence = Occurrence.new
@@ -15,17 +16,24 @@ class OccurrencesController < ApplicationController
     end
   end
 
+  def update
+    @occurrence.update(event_params)
+    redirect_to :back
+  end
+
   def destroy
-    @occurrence = occurrence.find(params[:id])
     @occurrence.destroy
     redirect_to :back
   end
 
   private
 
-
   def find_event
     @event = Event.find(params[:event_id])
+  end
+
+  def find_occurrence
+     @occurrence = occurrence.find(params[:id])
   end
 
   def occurrence_params
