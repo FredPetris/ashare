@@ -5,7 +5,6 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.search(params[:search], params[:value])
-    # @featured_events = Event.all.sample(6)
   end
 
   def show
@@ -20,7 +19,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      redirect_to events_path
+      redirect_to @event
     else
      render :new
     end
@@ -31,7 +30,7 @@ class EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to :back
+      redirect_to @event
     else
      render :edit
     end
