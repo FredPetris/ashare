@@ -3,8 +3,8 @@
 <div class="row">
   <% @participants.order("id asc").each do |participant| %>
     <div class="col-md-4">
-      <% occurrence = Occurrence.find(participant.occurrence_id) %>
-      <% event = Event.find(occurrence.event_id) %>
+      <% occurrence = participant.occurrence %>
+      <% event = occurrence.event %>
       <h3>
         <%= event.label %>
       </h3>
