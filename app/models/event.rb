@@ -13,6 +13,9 @@ class Event < ActiveRecord::Base
   validates :place, :numericality => { :greater_than_or_equal_to => 0 }
   validates :participation, :numericality => { :greater_than_or_equal_to => 0 }
 
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
+
   def self.search(search, value)
     if search
       if search == "user_id"

@@ -5,11 +5,18 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.search(params[:search], params[:value])
+
+     @events_coordinate = Gmaps4rails.build_markers(@events) do |event, marker|
+      marker.lat event.latitude
+      marker.lng event.longitude
+    end
   end
 
   def show
     @occurrences = @event.occurrences
     @pictures = @event.pictures
+    @event = Event.find(params[:id])
+    @event_coordinates = { lat: @event.latitude, lng: @event.longitude }
   end
 
   def new
