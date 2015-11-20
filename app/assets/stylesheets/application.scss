@@ -21,7 +21,6 @@ html {
 
 body {
   height: 100%;
-  position: relative;
   background: $gray-lighter;
 }
 
@@ -30,6 +29,7 @@ body {
   width: 370px;
   height: 320px;
   background-color: white;
+  box-shadow: 0.5px 0.5px 0.5px #A7A7A7;
   margin-bottom: 20px;
   z-index: 0;
   color: $gray-darker;
@@ -107,6 +107,7 @@ h1 {
 
 .modal {
   color: white;
+  font-size: 16px;
 }
 
 

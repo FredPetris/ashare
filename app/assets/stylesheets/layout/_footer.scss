@@ -6,3 +6,17 @@ footer {
   width: 100%;
   bottom: 0px;
 }
+
+.social-links li {
+  display: inline-block;
+  margin: auto 20px;
+  padding-top: 8px;
+}
+
+.fa {
+  color: $gray-darker;
+  border: 1px solid $gray-darker;
+  border-radius: 50px;
+  padding: 8px;
+  font-size: 20px;
+}
