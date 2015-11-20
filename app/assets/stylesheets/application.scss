@@ -23,6 +23,7 @@ html {
 body {
   height: 100%;
   background: $gray-lighter;
+  overflow: auto;
 }
 
 .card {
@@ -102,13 +103,9 @@ h1 {
     }
 }
 
-.search_cat {
-  margin-bottom: 80px;
-}
-
 .modal {
   color: white;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 

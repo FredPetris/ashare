@@ -5,8 +5,7 @@
 
 <div class="row">
   <% @events.each do |event| %>
-    <div class="col-md-4">
-
+    <div class="col-lg-4 rm-padding-sm col-md-6">
       <div class="card">
         <div class="card_thumb">
           <% if event.pictures.count > 0 %>
@@ -23,20 +22,17 @@
           <h4 class="card_category"><%= event.category %></h4>
           <p class="card_city"><%= event.city %></p>
         </div>
-        <div class="card_footer">
-        </div>
       </div>
     </div>
   <% end %>
 </div>
 
-<div class="search_cat">
-  <div class="row">
-    <div class="text-center"
-      <form action="/events" method="get">
-        <input type="text" name="search" placeholder="Catégorie">
-        <input type="submit">
-      </form>
-    </div>
-  </div>
+<div class="row">
+  <div class="text-center"
+    <form action="/events" method="get">
+      <input type="text" name="search" placeholder="Catégorie">
+      <input type="submit">
+    </form>
+  </div>s
 </div>
+
