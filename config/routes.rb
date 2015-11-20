@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  root to: 'events#index'
+  root to: 'pages#home'
+  # root to: 'events#index'
 
   resources :events do
     resources :pictures, only: [:new, :create, :destroy]
@@ -13,5 +14,5 @@ Rails.application.routes.draw do
   resources :participants, only: [:index, :destroy, :update]
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
-  # root to: 'pages#home'
+
 end
