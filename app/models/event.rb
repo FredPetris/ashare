@@ -20,8 +20,10 @@ class Event < ActiveRecord::Base
     if search
       if search == "user_id"
         self.where(user_id: value.to_i)
+      elsif search == "city"
+        self.near(value, 100)
       else
-        self.where(:category => ["category LIKE ?", "#{search}"])
+        self.where(:category => ["category LIKE ?", "#{value}"])
       end
     else
       self.all
