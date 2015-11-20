@@ -9,18 +9,18 @@
 </p>
 
 <p>
-  <% if user_signed_in? and @event.user_id == current_user.id %>
+  <% if user_signed_in? and user_organizer? %>
     <%= link_to "Ajouter une image", new_event_picture_path(@event),
-      class: "btn btn-primary" %>
+      class: "btn btn-primary btn-sm" %>
   <% end %>
 </p>
 
 <div class="row">
   <% @event.pictures.each do |picture| %>
-    <div class="col-xs-6 col-sm-3 ">
+    <div class="col-md-4">
       <%= cl_image_tag picture.image_url, :width => 300, :crop => :fill %>
       <%= picture.label %>
-      <% if user_signed_in? and @event.user_id == current_user.id %>
+      <% if user_signed_in? and user_organizer? %>
         <%= link_to event_picture_path(@event, picture),
           method: :delete,
           data: { confirm: "Are you sure?" } do %>
@@ -31,37 +31,87 @@
   <% end %>
 </div>
 
+<hr>
+
 <p>
-  <% if user_signed_in? and @event.user_id == current_user.id %>
+  <% if user_signed_in? and user_organizer? %>
     <%= link_to "Ajouter une date", new_event_occurrence_path(@event),
-      class: "btn btn-primary" %>
+      class: "btn btn-primary btn-sm" %>
   <% end %>
 </p>
 
 <div class="row text-center">
   <% @event.occurrences.each do |occurrence| %>
+
     <div class="col-xs-6 col-sm-3">
-      <span>
+
+      <div class="item">
         <%= occurrence.date.strftime('%a %d %b %Y') %> à
         <%= occurrence.time.strftime('%H') %> :
         <%= occurrence.time.strftime('%M') %>
-        <% if user_signed_in? and @event.user_id == current_user.id %>
+        <% if user_signed_in? and user_organizer? %>
           <%= link_to event_occurrence_path(@event, occurrence),
             method: :delete,
             data: { confirm: "Are you sure?" } do %>
             <i class="glyphicon glyphicon-trash"></i>
           <% end %>
         <% end %>
-        <p> Il reste <%= pluralize(@event.place - occurrence.participants.count, "place") %>
-        </p>
-      </span>
+        <p>Il reste <%= pluralize(@event.place - occurrence.participants.count, "place") %></p>
+      </div>
+
+<hr>
+
       <% if occurrence.participate?(current_user) %>
-        <%= link_to "Je veux me désinscrire", participant_path(occurrence.participants.where(user: current_user).take.id), method: :delete, class: "btn btn-danger" %>
+        <%= link_to "Je veux me désinscrire", participant_path(occurrence.participants.where(user: current_user).take.id), method: :delete, class: "btn btn-danger btn-sm" %>
+      <% elsif @event.place - occurrence.participants.count > 0 %>
+        <%= link_to "Je veux participer", occurrence_participants_path(occurrence), method: :post, class: "btn btn-primary btn-sm" %>
       <% else %>
-        <%= link_to "Je veux participer", occurrence_participants_path(occurrence), method: :post, class: "btn btn-primary" %>
+        <div class="btn btn-danger btn-sm" disabled="disabled">Aucune place disponible</div>
       <% end %>
+
+      <% if occurrence.participate?(current_user) and occurrence.participants.count > 0 %>
+        <%= link_to "Voir les autres participants", "#modal_participants_#{occurrence.id}", :class => "btn btn-info btn-sm", "data-toggle" => "modal" %>
+        <div class="modal fade" id="modal_participants_<%= occurrence.id %>" title="Les participants">
+          <div class="modal-header">
+            <button aria-hidden="false" class="close" data-dismiss="modal" type="button">×</button>
+            <h3 id="myModalLabel">Les participants</h3>
+          </div>
+          <div class="modal-body">
+            <% occurrence.participants.each do |participant| %>
+            <p>
+              <%= participant.user.first_name %>
+              <%= participant.user.last_name %>
+            </p>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button aria-hidden="true" class="btn" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      <% end %>
+
+      <% if occurrence.participants.find_by_content(!nil) %>
+        <%= link_to "Voir les commentaires", "#modal_commentaires_#{occurrence.id}", :class => "btn btn-info btn-sm", "data-toggle" => "modal" %>
+        <div class="modal fade" id="modal_commentaires_<%= occurrence.id %>" title="Les commentaires">
+          <div class="modal-header">
+            <button aria-hidden="false" class="close" data-dismiss="modal" type="button">×</button>
+            <h3 id="myModalLabel">Les commentaires</h3>
+          </div>
+          <div class="modal-body">
+            <% occurrence.participants.each do |participant| %>
+            <p>
+              <%= participant.content %>
+            </p>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button aria-hidden="true" class="btn" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      <% end %>
+
     </div>
   <% end %>
 </div>
 
-<%= link_to "Back", root_path, class: "btn btn-info btn-back" %>
+<%= link_to "Back", root_path, class: "btn btn-info btn-sm" %>

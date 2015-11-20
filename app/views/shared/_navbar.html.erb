@@ -1,27 +1,26 @@
 <nav class="navbar-wagon">
   <div class="container navbar-wagon-container">
 
-    <%= link_to root_path do
-        image_tag "logo.png", class: "navbar-wagon-logo"
-    end %>
+    <%= link_to "@share", root_path, class: "navbar-wagon-logo" %>
+
 
     <div class="navbar-wagon-pusher"></div>
 
-    <form action="" class="navbar-wagon-search hidden-xs hidden-sm">
-      <input type="text" class="navbar-wagon-search-input" placeholder="Search something">
+    <form action="/events" method="get" class="navbar-wagon-search hidden-xs hidden-sm">
+      <input type="text" name="search" class="navbar-wagon-search-input" placeholder="Catégorie">
       <button type="submit" class="navbar-wagon-search-btn">
         <i class="fa fa-search"></i>
       </button>
     </form>
     <hr class="hidden-xs hidden-sm">
     <% if user_signed_in? %>
-      <%= link_to "#", class: "navbar-wagon-item navbar-wagon-link hidden-xs" do %>
-        <div class="icon-badge-container">
-          <i class="fa fa-envelope-o"></i>
-          <div class="icon-badge icon-badge-blue">3</div>
-        </div>
-      <% end %>
-      <hr>
+      <%#= link_to "#", class: "navbar-wagon-item navbar-wagon-link hidden-xs" do %>
+        <!-- <div class="icon-badge-container"> -->
+          <!-- <i class="fa fa-envelope-o"></i> -->
+          <!-- <div class="icon-badge icon-badge-blue">3</div> -->
+        <!-- </div> -->
+      <%# end %>
+      <!-- <hr> -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
           <%= image_tag current_user.picture, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
@@ -32,7 +31,12 @@
               <% end %>
             </li>
             <li>
-              <%= link_to "#" do %>
+              <%= link_to events_path do %>
+                <i class="fa fa-home"></i>  <%= t ".profile", default: "Home" %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to events_path(search: "user_id", value: current_user.id) do %>
                 <i class="fa fa-home"></i>  <%= t ".profile", default: "Mes annonces" %>
               <% end %>
             </li>
@@ -52,7 +56,7 @@
     <% else %>
       <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>
-    <hr>
-    <%= link_to t(".top_call_to_action", default: "Post stuff"), "#", class: "navbar-wagon-item navbar-wagon-button btn" %>
+    <!-- <hr> -->
+    <%#= link_to t(".top_call_to_action", default: "Post stuff"), "#", class: "navbar-wagon-item navbar-wagon-button btn" %>
   </div>
 </nav>

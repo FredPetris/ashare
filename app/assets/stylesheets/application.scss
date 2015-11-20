@@ -13,3 +13,100 @@
 @import "components/index";
 @import "pages/index";
 @import "vendor/index";
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+body {
+  height: 100%;
+  background: $gray-lighter;
+  // overflow: auto;
+}
+
+.card {
+  position: relative;
+  width: 370px;
+  height: 320px;
+  background-color: white;
+  box-shadow: 0.5px 0.5px 0.5px #A7A7A7;
+  margin-bottom: 20px;
+  z-index: 0;
+  color: $gray-darker;
+
+  &_thumb {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+  }
+  &_price {
+    position: absolute;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    padding-top: 15px;
+    border-radius: 50%;
+    background-color: $gray-lighter;
+    font-size: 15px;
+    z-index: 3;
+    top: 25px;
+    right: 25px;
+  }
+  &_thumb {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+  }
+  &_title {
+    position: absolute;
+    text-align: center;
+    left: 20px;
+    right: 20px;
+    bottom: 45px;
+    font-size: 18px;
+  }
+  &_category {
+    position: absolute;
+    text-align: center;
+    left: 20px;
+    right: 20px;
+    bottom: 25px;
+    font-size: 12px;
+    color: $gray-light;
+  }
+  &_city {
+    position: absolute;
+    text-align: center;
+    left: 20px;
+    right: 20px;
+    bottom: 1px;
+    font-size: 16px;
+    color: $gray-light;
+  }
+}
+
+h1 {
+  font-family: open sans;
+  font-size: 30px;
+  text-align: center;
+}
+
+.navbar-wagon-logo {
+  color: $gray-darker;
+  font-size: 40px;
+
+  &:hover {
+    text-decoration: none;
+    color: $gray-light;
+    }
+}
+
+.modal {
+  color: white;
+  font-size: 20px;
+}
+
+
+

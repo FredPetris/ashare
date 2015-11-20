@@ -1,2 +1,24 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="jumbo text-center">
+ <div class="jumbo-filter">
+   <div class="accroche">
+     <h1>Cherchez des actvités près de chez vous</h1>
+   </div>
+   <div class="searchbar">
+     <div class="container">
+       <div class="row">
+         <div class="col-lg-6 col-lg-offset-3">
+           <div class="searchbar-content">
+             <%= simple_form_for :search, :html => { :class => 'form-inline' }, url: events_path, method: :get do |f| %>
+             <%= f.input :city, placeholder: 'Entrez une ville', class: 'placeholder-font', label: false, :input_html => { :size => 45} %>
+             <%= f.submit "Rechercher", class: 'btn btn-primary' %>
+             <% end %>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+
+<% @events = Event.all.sample(3) %>
+<%= render 'events/feature_events' %>

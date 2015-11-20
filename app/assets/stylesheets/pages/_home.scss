@@ -2,3 +2,40 @@
  * SASS code SPECIFIC TO your home page
  * (margin/padding adjustments, background image, etc..)
  * ------------------------------------- */
+.jumbo {
+ background-image: url(http://lavillamathilda.com/wp-content/uploads/2015/06/Marchi-13-reduite-e1435831071746.jpg);
+ background-size: cover;
+ width: 100%;
+ padding-top: 220px;
+ padding-bottom: 40px;
+ margin-top: 20px;
+ margin-bottom: 20px;
+ color: #FFFFFF ;
+ position:relative;
+
+
+ h1 {
+    font-size: 50px;
+    color:white;
+    margin: 0 auto;
+    font-family: 'Raileway', sans-serif;
+  }
+
+  .accroche {
+    padding: 20px 0px;
+    text-shadow: 0px 0px 20px #000;
+  }
+
+  .form-inline .form-control {
+    display: inline-block;
+    width: 100%;
+  }
+
+  .btn-primary {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .placeholder-font {
+    font-family: 'Roboto', sans-serif;
+  }
+}
