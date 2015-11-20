@@ -1,7 +1,7 @@
 // Your footer style
 .footer {
   position: absolute;
-  background-color: white;
+  background-color: $gray-light;
   height: 60px;
   width: 100%;
   left: 0px;
@@ -15,10 +15,14 @@
   }
 
   .fa {
-    color: $gray-darker;
-    border: 1px solid $gray-darker;
+    // color: $gray-darker;
+    color: white;
+    border: 1px solid white;
     border-radius: 50px;
     padding: 10px;
     font-size: 20px;
+    &:hover {
+      color: $gray-dark;
+    }
   }
 }
