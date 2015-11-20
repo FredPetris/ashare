@@ -15,15 +15,13 @@
 @import "vendor/index";
 
 html {
-  height: 100%;
-  box-sizing: border-box;
+  min-height: 100%;
   position: relative;
 }
 
 body {
-  height: 100%;
+  margin: 0 0 100px; /* bottom = footer height */
   background: $gray-lighter;
-  // overflow: auto;
 }
 
 .card {
