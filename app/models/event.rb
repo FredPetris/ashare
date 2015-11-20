@@ -13,6 +13,9 @@ class Event < ActiveRecord::Base
   validates :place, :numericality => { :greater_than_or_equal_to => 0 }
   validates :participation, :numericality => { :greater_than_or_equal_to => 0 }
 
+  geocoded_by :city
+  after_validation :geocode
+
   def self.search(search)
     if search
       self.where(:category => ["category LIKE ?", "#{search}"])
@@ -20,5 +23,8 @@ class Event < ActiveRecord::Base
       self.all
     end
   end
+
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
 
 end

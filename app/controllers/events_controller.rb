@@ -6,11 +6,19 @@ class EventsController < ApplicationController
   def index
     @events = Event.search(params[:search])
     # @featured_events = Event.all.sample(6)
+    @markers = Gmaps4rails.build_markers(@events) do |event, marker|
+      marker.lat event.latitude
+      marker.lng event.longitude
+
   end
 
   def show
     @occurrences = @event.occurrences
     @pictures = @event.pictures
+
+    @markers = Gmaps4rails.build_markers(@events) do |event, marker|
+      marker.lat event.latitude
+      marker.lng event.longitude
   end
 
   def new
