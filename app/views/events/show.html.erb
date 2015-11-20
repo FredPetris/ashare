@@ -1,11 +1,12 @@
 <h1><%= @event.label %></h1>
-<% if user_signed_in? and @event.user_id == current_user.id %>
-  <%= link_to edit_event_path(@event) do %>
-      <i class="glyphicon glyphicon-pencil"></i>
-  <% end %>
-<% end %>
+
 <p>
   <%= @event.description %>
+  <% if user_signed_in? and @event.user_id == current_user.id %>
+  <%= link_to edit_event_path(@event) do %>
+      <i class="glyphicon glyphicon-pencil"></i>
+    <% end %>
+  <% end %>
 </p>
 
 <p>
@@ -17,8 +18,8 @@
 
 <div class="row">
   <% @event.pictures.each do |picture| %>
-    <div class="col-md-4">
-      <%= cl_image_tag picture.image_url, :width => 300, :crop => :fill %>
+    <div class="col-md-4 event-picture">
+      <%= cl_image_tag picture.image_url, :width => 300, :height => 200, :crop => :fill %>
       <%= picture.label %>
       <% if user_signed_in? and user_organizer? %>
         <%= link_to event_picture_path(@event, picture),
@@ -45,7 +46,7 @@
 
     <div class="col-xs-6 col-sm-3">
 
-      <div class="item">
+      <div class="item-date">
         <%= occurrence.date.strftime('%a %d %b %Y') %> à
         <%= occurrence.time.strftime('%H') %> :
         <%= occurrence.time.strftime('%M') %>
@@ -56,7 +57,7 @@
             <i class="glyphicon glyphicon-trash"></i>
           <% end %>
         <% end %>
-        <p>Il reste <%= pluralize(@event.place - occurrence.participants.count, "place") %></p>
+        <p class="item-places">Il reste <%= pluralize(@event.place - occurrence.participants.count, "place") %></p>
       </div>
 
 <hr>
@@ -113,5 +114,7 @@
     </div>
   <% end %>
 </div>
-
-<%= link_to "Back", root_path, class: "btn btn-info btn-sm" %>
+<br><br>
+<div>
+  <%= link_to "Back", root_path, class: "btn btn-info btn-sm text-center" %>
+</div>

@@ -1,28 +1,31 @@
-<h2>Mes participations</h2>
+<h1>Mes participations</h1>
 
-<div class="row">
-  <% @participants.order("id asc").each do |participant| %>
-    <div class="card-participant">
+<% @participants.order("id asc").each do |participant| %>
       <% occurrence = participant.occurrence %>
       <% event = occurrence.event %>
-      <h3>
-        <%= event.label %>
-      </h3>
-      <%= occurrence.date.strftime('%a %d %b %Y') %> à
-      <%= occurrence.time.strftime('%H') %> :
-      <%= occurrence.time.strftime('%M') %>
-      <p>
-        <% if event.pictures.count > 0 %>
-          <%= cl_image_tag event.pictures.first.image_url , :width => 100, :height => 150, :crop => :fill %>
+  <div class="row">
+    <div class="card-participant">
+      <div class="col-lg-2 card-participant-thumb">
+         <% if event.pictures.count > 0 %>
+          <%= cl_image_tag event.pictures.first.image_url , :width => 140, :height => 200, :crop => :fill %>
         <% end %>
-      </p>
-
+      </div>
       <%= simple_form_for participant do |f| %>
-        <%= f.input :content, input_html: {value: f.object.content} %>
-        <%= f.input :rating, input_html: {value: f.object.rating}, collection: 0..5 %>
-
-        <%= f.button :submit, class: "btn btn-primary btn-sm" %>
+        <div class="col-lg-7 card-participant-img">
+          <p class="card-participant-title"><%= event.label %></p>
+          <p class="card-participant-date">
+            <%= occurrence.date.strftime('%a %d %b %Y') %> à
+            <%= occurrence.time.strftime('%H') %> :
+            <%= occurrence.time.strftime('%M') %>
+          </p>
+          <%= f.input :content, input_html: {value: f.object.content} %>
+        </div>
+        <div class="col-lg-3 card-participant-rating">
+          <%= f.input :rating, input_html: {value: f.object.rating}, collection: 0..5 %>
+          <%= f.button :submit, class: "btn btn-primary btn-sm" %>
+        </div>
       <% end %>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
+
