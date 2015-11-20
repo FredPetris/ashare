@@ -1,6 +1,6 @@
 <h1>Des idées d'évènements</h1>
-<p>
-  <%= link_to "Créer un évènement", new_event_path, class: "btn btn-primary" %>
+<p class="text-center">
+  <%= link_to "Créer un évènement", new_event_path, class: "btn btn-primary btn-sm" %>
 </p>
 
 <div class="row">
@@ -30,11 +30,13 @@
   <% end %>
 </div>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-4">
-    <form action="/events" method="get">
-      <input type="text" name="search">
-      <input type="submit">
-    </form>
+<div class="search_cat">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-4">
+      <form action="/events" method="get">
+        <input type="text" name="search" placeholder="Catégorie">
+        <input type="submit">
+      </form>
+    </div>
   </div>
 </div>

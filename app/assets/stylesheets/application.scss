@@ -14,7 +14,14 @@
 @import "pages/index";
 @import "vendor/index";
 
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
 body {
+  height: 100%;
+  position: relative;
   background: $gray-lighter;
 }
 
@@ -76,11 +83,31 @@ body {
     font-size: 16px;
     color: $gray-light;
   }
-
 }
 
+h1 {
+  font-family: open sans;
+  font-size: 30px;
+  text-align: center;
+}
 
+.navbar-wagon-logo {
+  color: $gray-darker;
+  font-size: 40px;
 
+  &:hover {
+    text-decoration: none;
+    color: $gray-light;
+    }
+}
+
+.search_cat {
+  margin-bottom: 80px;
+}
+
+.modal {
+  color: white;
+}
 
 
 

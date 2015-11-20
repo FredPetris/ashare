@@ -10,7 +10,13 @@
     width: 100%;
   }
   &-logo {
-    width: 50px;
+    // width: 50px;
+    color: $gray-darker;
+    font-size: 40px;
+  }
+  &-logo:hover {
+    text-decoration: none;
+    color: $gray-light;
   }
   &-container {
     display: flex;
