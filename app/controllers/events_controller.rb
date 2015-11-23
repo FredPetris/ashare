@@ -4,12 +4,20 @@ class EventsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @events = Event.search(params[:search], params[:value])
+
+    @events = Event.search(params[:search].keys.first, params[:search][params[:search].keys.first])
+
+    @events_coordinates = Gmaps4rails.build_markers(@events) do |event, marker|
+      marker.lat event.latitude
+      marker.lng event.longitude
+    end
   end
 
   def show
     @occurrences = @event.occurrences
     @pictures = @event.pictures
+    @event = Event.find(params[:id])
+    @event_coordinates = { lat: @event.latitude, lng: @event.longitude }
   end
 
   def new

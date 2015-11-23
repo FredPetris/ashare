@@ -13,12 +13,17 @@ class Event < ActiveRecord::Base
   validates :place, :numericality => { :greater_than_or_equal_to => 0 }
   validates :participation, :numericality => { :greater_than_or_equal_to => 0 }
 
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
+
   def self.search(search, value)
     if search
       if search == "user_id"
         self.where(user_id: value.to_i)
+      elsif search == "city"
+        self.near(value, 100)
       else
-        self.where(:category => ["category LIKE ?", "#{search}"])
+        self.where(:category => ["category LIKE ?", "#{value}"])
       end
     else
       self.all
